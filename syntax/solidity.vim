@@ -37,8 +37,9 @@ hi def link solString            String
 " Function
 syn match   solFunction          /\<function\>/ nextgroup=solFuncName,solFuncArgs skipwhite
 syn match   solFuncName          contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=solFuncArgs skipwhite
-syn region  solFuncArgs          contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas,solBuiltinType nextgroup=solFuncBlock,solFuncModifier keepend skipwhite skipempty
-syn match   solFuncModifier      contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ skipwhite
+syn region  solFuncArgs          contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas,solBuiltinType nextgroup=solFuncModifier keepend skipwhite skipempty
+syn match   solFuncModifier      contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=solFuncModifier,solFuncReturns skipwhite
+syn region  solFuncReturns       contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas,solBuiltinType
 syn match   solFuncArgCommas     contained ','
 
 hi def link solFunction          Type
