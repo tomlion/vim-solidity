@@ -9,7 +9,7 @@ endif
 
 " basic
 syn keyword solKeyword           break case const continue default delete do else for if in mapping
-syn keyword solKeyword           new private public return returns struct switch this var while constant
+syn keyword solKeyword           new private public return returns struct switch this var while constant internal
 syn keyword solKeyword           modifier suicide
 syn keyword solConstant          true false wei szabo finney ether seconds minutes hours days weeks years now
 syn keyword solBuiltinType       mapping real string text msg block tx ureal address bool bytes
