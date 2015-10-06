@@ -37,14 +37,15 @@ hi def link solString            String
 " Function
 syn match   solFunction          /\<function\>/ nextgroup=solFuncName,solFuncArgs skipwhite
 syn match   solFuncName          contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=solFuncArgs skipwhite
-syn region  solFuncArgs          contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas,solBuiltinType nextgroup=solFuncModifier keepend skipwhite skipempty
-syn match   solFuncModifier      contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=solFuncModifier,solFuncReturns skipwhite
+syn region  solFuncArgs          contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas,solBuiltinType nextgroup=solModifierName,solFuncReturns keepend skipwhite skipempty
+syn match   solModifierName      contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=solModifierArgs,solModifierName skipwhite
+syn region  solModifierArgs      contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas nextgroup=solModifierName,solFuncReturns skipwhite
 syn region  solFuncReturns       contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas,solBuiltinType
 syn match   solFuncArgCommas     contained ','
 
 hi def link solFunction          Type
 hi def link solFuncName          Function
-hi def link solFuncModifier      Function
+hi def link solModifierName      Function
 
 " Contract
 syn match   solContract          /\<\%(contract\|library\)\>/ nextgroup=solContractName skipwhite
