@@ -9,7 +9,7 @@ To install, install Vundle, then add to ~/.vimrc
 Plugin 'duanenielsen/vim-solidity'
 ```
 
-Then run 
+Then open vim and type the vim command 
 
 ```
 :PluginInstall!
