@@ -8,9 +8,11 @@ if exists("b:current_syntax")
 endif
 
 " basic
-syn keyword solKeyword           break case const continue default delete do else for if in mapping
-syn keyword solKeyword           new private public return returns struct switch this var while constant internal
-syn keyword solKeyword           modifier suicide
+syn keyword solKeyword           anonymous as assembly break case catch constant continue contract default
+syn keyword solKeyword           do else enum event external final for function if import indexed inline
+syn keyword solKeyword           internal is let library mapping match memory modifier new of private public
+syn keyword solKeyword           relocatable return returns storage struct switch throw try type typeof using
+syn keyword solKeyword           var while
 syn keyword solConstant          true false wei szabo finney ether seconds minutes hours days weeks years now
 syn keyword solBuiltinType       mapping real string text msg block tx ureal address bool bytes
 syn keyword solBuiltinType       int int8 int16 int24 int32 int40 int48 int56 int64 int72 int80 int88 int96 int104 int112 int120 int128 int136 int144 int152 int160 int168 int178 int184 int192 int200 int208 int216 int224 int232 int240 int248 int256
