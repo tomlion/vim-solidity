@@ -8,9 +8,10 @@ if exists("b:current_syntax")
 endif
 
 " basic
-syn keyword solKeyword           anonymous as assembly break case catch constant continue contract default
-syn keyword solKeyword           do else enum event external final for function if import indexed inline
-syn keyword solKeyword           internal is let library match memory modifier new of private public
+" contract, library and event are defined at bottom of file
+syn keyword solKeyword           anonymous as assembly break case catch constant continue default
+syn keyword solKeyword           do else enum external final for function if import indexed inline
+syn keyword solKeyword           internal is let match memory modifier new of private public
 syn keyword solKeyword           relocatable return returns storage struct switch throw try type typeof using
 syn keyword solKeyword           var while
 syn keyword solConstant          true false wei szabo finney ether seconds minutes hours days weeks years now after
