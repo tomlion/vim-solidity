@@ -86,7 +86,7 @@ syn keyword solBuiltinType       ufixed232x8 ufixed232x16 ufixed232x24
 syn keyword solBuiltinType       ufixed240x8 ufixed240x16
 syn keyword solBuiltinType       ufixed248x8
 syn keyword solBuiltinType       string string1 string2 string3 string4 string5 string6 string7 string8 string9 string10 string11 string12 string13 string14 string15 string16 string17 string18 string19 string20 string21 string22 string23 string24 string25 string26 string27 string28 string29 string30 string31 string32
-syn keyword solBuiltinType       bytes bytes1 bytes2 bytes3 bytes4 bytes5 bytes6 bytes7 bytes8 bytes9 bytes10 bytes11 bytes12 bytes13 bytes14 bytes15 bytes16 bytes17 bytes18 bytes19 bytes20 bytes21 bytes22 bytes23 bytes24 bytes25 bytes26 bytes27 bytes28 bytes29 bytes30 bytes31 bytes32
+syn keyword solBuiltinType       byte bytes bytes1 bytes2 bytes3 bytes4 bytes5 bytes6 bytes7 bytes8 bytes9 bytes10 bytes11 bytes12 bytes13 bytes14 bytes15 bytes16 bytes17 bytes18 bytes19 bytes20 bytes21 bytes22 bytes23 bytes24 bytes25 bytes26 bytes27 bytes28 bytes29 bytes30 bytes31 bytes32
 
 hi def link solKeyword           Keyword
 hi def link solConstant          Constant
