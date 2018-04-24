@@ -95,8 +95,8 @@ hi def link solBuiltinType       Type
 syn match   solOperator          /\(!\||\|&\|+\|-\|<\|>\|=\|%\|\/\|*\|\~\|\^\)/
 syn match   solNumber            /\<-\=\d\+L\=\>\|\<0[xX]\x\+\>/
 syn match   solFloat             /\<-\=\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%([eE][+-]\=\d\+\)\=\>/
-syn region  solString            start=+"+  skip=+\\\\\|\\$"+  end=+"+
-syn region  solString            start=+'+  skip=+\\\\\|\\$'+  end=+'+
+syn region  solString            start=+"+  skip=+\\\\\|\\$"\|\\"+  end=+"+
+syn region  solString            start=+'+  skip=+\\\\\|\\$'\|\\'+  end=+'+
 
 hi def link solOperator          Operator
 hi def link solNumber            Number
