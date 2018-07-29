@@ -26,3 +26,6 @@ Plug 'tomlion/vim-solidity'
 
 ### No Plugin Manager
 Copy all of the files manually into your `~/.vim`.
+
+### After Installation
+If the syntax is not highlighted after installation, try turning it on with ```:syntax on```.
