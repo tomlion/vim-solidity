@@ -143,6 +143,6 @@ syn region  solLineComment       start=+\/\/+ end=+$+ contains=solCommentTodo,@S
 syn region  solLineComment       start=+^\s*\/\/+ skip=+\n\s*\/\/+ end=+$+ contains=solCommentTodo,@Spell fold
 syn region  solComment           start="/\*"  end="\*/" contains=solCommentTodo,@Spell fold
 
-hi def link solCommentTodo       Comment
+hi def link solCommentTodo       Todo
 hi def link solLineComment       Comment
 hi def link solComment           Comment
