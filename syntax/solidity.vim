@@ -13,7 +13,7 @@ syn keyword solKeyword           abstract anonymous as assembly break case catch
 syn keyword solKeyword           delete do else emit enum external final for function if import in indexed inline
 syn keyword solKeyword           interface internal is let match memory modifier new of payable pragma private public pure
 syn keyword solKeyword           relocatable require return returns static storage struct throw try type typeof using
-syn keyword solKeyword           var view while
+syn keyword solKeyword           var view while constructor
 syn keyword solConstant          true false wei szabo finney ether seconds minutes hours days weeks years now
 syn keyword solConstant          block msg now tx sha3 keccak256 sha256 ripemd160 ecerecover addmod mulmod this super selfdestruct
 syn keyword solBuiltinType       mapping address bool
