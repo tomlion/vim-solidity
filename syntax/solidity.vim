@@ -118,7 +118,7 @@ hi def link solString            String
 syn keyword solConstructor       constructor
 
 " Function
-syn match   solFunction          /\<function\>/ nextgroup=solFuncName,solFuncArgs skipwhite
+syn keyword solFunction          function nextgroup=solFuncName,solFuncArgs skipwhite
 syn match   solFuncName          contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=solFuncArgs skipwhite
 syn region  solFuncArgs          contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas,solBuiltinType nextgroup=solModifierName,solFuncReturns keepend skipwhite skipempty
 syn match   solModifierName      contained /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=solModifierArgs,solModifierName skipwhite
