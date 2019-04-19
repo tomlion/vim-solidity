@@ -13,7 +13,7 @@ syn keyword solKeyword           abstract anonymous as assembly break case catch
 syn keyword solKeyword           delete do else emit enum external final for function if import in indexed inline
 syn keyword solKeyword           interface internal is let match memory modifier new of payable pragma private public pure
 syn keyword solKeyword           relocatable require return returns static storage struct throw try type typeof using
-syn keyword solKeyword           var view while
+syn keyword solKeyword           var view while calldata
 syn keyword solConstant          true false wei szabo finney ether seconds minutes hours days weeks years now
 syn keyword solConstant          block msg now tx sha3 keccak256 sha256 ripemd160 ecerecover addmod mulmod this super selfdestruct
 syn keyword solBuiltinType       mapping address bool
@@ -94,6 +94,17 @@ hi def link solBuiltinType       Type
 
 syn match   solOperator          /\(!\||\|&\|+\|-\|<\|>\|=\|%\|\/\|*\|\~\|\^\)/
 syn match   solNumber            /\<-\=\d\+L\=\>\|\<0[xX]\x\+\>/
+syn match   solOperator          /\(!\||\|&\|+\|-\|<\|>\|=\|%\|\/\|*\|\~\|\^\)/
+syn match   solNumber            /\<-\=\d\+L\=\>\|\<0[xX]\x\+\>/
+
+" Floating point like number with E and no decimal point (+,-)
+syn match   solNumber           '[-+]\=\d[[:digit:]]*[eE][\-+]\=\d\+'
+syn match   solNumber           '\d[[:digit:]]*[eE][\-+]\=\d\+'
+
+" Floating point like number with E and decimal point (+,-)
+syn match   solNumber           '[-+]\=\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
+syn match   solNumber           '\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
+
 syn match   solFloat             /\<-\=\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%([eE][+-]\=\d\+\)\=\>/
 syn region  solString            start=+"+  skip=+\\\\\|\\$"+  end=+"+
 syn region  solString            start=+'+  skip=+\\\\\|\\$'+  end=+'+
@@ -102,6 +113,9 @@ hi def link solOperator          Operator
 hi def link solNumber            Number
 hi def link solFloat             Float
 hi def link solString            String
+
+" Constructor
+syn keyword solConstructor       constructor
 
 " Function
 syn match   solFunction          /\<function\>/ nextgroup=solFuncName,solFuncArgs skipwhite
@@ -115,6 +129,7 @@ syn match   solFuncArgCommas     contained ','
 hi def link solFunction          Type
 hi def link solFuncName          Function
 hi def link solModifierName      Function
+hi def link solConstructor       Function
 
 " Contract
 syn match   solContract          /\<\%(contract\|library\|interface\)\>/ nextgroup=solContractName skipwhite
