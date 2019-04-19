@@ -126,10 +126,10 @@ syn region  solModifierArgs      contained matchgroup=solFuncParens start='(' en
 syn region  solFuncReturns       contained matchgroup=solFuncParens start='(' end=')' contains=solFuncArgCommas,solBuiltinType
 syn match   solFuncArgCommas     contained ','
 
+hi def link solConstructor       Type
 hi def link solFunction          Type
 hi def link solFuncName          Function
 hi def link solModifierName      Function
-hi def link solConstructor       Function
 
 " Contract
 syn match   solContract          /\<\%(contract\|library\|interface\)\>/ nextgroup=solContractName skipwhite
