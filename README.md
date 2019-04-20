@@ -7,21 +7,21 @@ contract-oriented programming language for Ethereum.
 Run the following command:
 
 ```bash
-git clone https://github.com/tomlion/vim-solidity.git ~/.vim/bundle/vim-solidity
+git clone https://github.com/TovarishFin/vim-solidity.git ~/.vim/bundle/vim-solidity
 ```
 
 ### Vundle
 Add the following line to your `~/.vimrc`:
 
 ```vim
-Plugin 'tomlion/vim-solidity'
+Plugin 'TovarishFin/vim-solidity'
 ```
 
 ### Plug
 Add the following line to your `~/.vimrc`:
 
 ```vim
-Plug 'tomlion/vim-solidity'
+Plug 'TovarishFin/vim-solidity'
 ```
 
 ### No Plugin Manager
