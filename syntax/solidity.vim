@@ -210,26 +210,3 @@ hi def link   solException        Exception
 
 syn keyword   solStorageType      storage memory calldata payable constant
 hi def link   solStorageType      StorageClass
-
-" Demo Colors... get rid of later...
-syn keyword   testConstant        constant
-syn keyword   testIdentifier      identifier
-syn keyword   testStatement       statement
-syn keyword   testPreProc         preproc
-syn keyword   testType            type
-syn keyword   testSpecial         special
-syn keyword   testUnderlined      underlined
-syn keyword   testIgnore          ignore
-syn keyword   testError           error
-syn keyword   testTodo            todo
-
-hi def link   testConstant        Constant
-hi def link   testIdentifier      Identifier
-hi def link   testStatement       Statement
-hi def link   testPreProc         PreProc
-hi def link   testType            Type
-hi def link   testSpecial         Special
-hi def link   testUnderlined      Underlined
-hi def link   testIngore          Ignore
-hi def link   testError           Error
-hi def link   testTodo            Todo
