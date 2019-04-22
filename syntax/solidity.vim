@@ -41,9 +41,9 @@ syn region    solEnumBody         matchgroup=solParens start='(' end=')' contain
 syn keyword   solStruct           struct nextgroup=solStructBody skipempty skipwhite
 syn region    solStructBody       matchgroup=solParens start='{' end='}' contained contains=solComma,solValueType,solStorageType,solStruct,solEnum,solMapping keepend
 
-hi def link   solMapping          Structure
-hi def link   solEnum             Structure
-hi def link   solStruct           Structure
+hi def link   solMapping          Define
+hi def link   solEnum             Define
+hi def link   solStruct           Define
 
 " Operators
 syn match     solOperator         /\(!\||\|&\|+\|-\|<\|>\|=\|%\|\/\|*\|\~\|\^\)/
@@ -66,12 +66,12 @@ syn region    solFuncParam        matchgroup=solParens start='(' end=')' contain
 syn keyword   solFuncModifier     external internal payable public pure view 
 syn match     solFuncModCustom    /\<[a-zA-Z_][0-9a-zA-z_$]*/ contained nextgroup=solFuncParam,solFuncModCustom,solFuncBody skipempty skipwhite 
 syn region    solFuncReturn       matchgroup=solParens start='(' end=')' contained contains=solValueType,solStorageType,solFuncBody
-syn region    solFuncBody         start='{' end='}' contained contains=solTypeCast,solMethod,solValueType,solConstant,solKeyword,solConditional,solRepeat,solLabel,solException,solStructure,solStorageType,solOperator,solNumber,solString,solFuncCall skipempty skipwhite keepend transparent
+syn region    solFuncBody         start='{' end='}' contained contains=solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solConditional,solRepeat,solLabel,solException,solStructure,solStorageType,solOperator,solNumber,solString,solFuncCall skipempty skipwhite keepend transparent
 syn match     solFuncCall         /\<[a-zA-Z_][0-9a-zA-z_$]*\(uint\|int\|ufixed\|bytes\|address\|string\|bool\)\@<!\((\)\@=/ contained
 
 
-hi def link   solFunction         Type
-hi def link   solConstructor      Type
+hi def link   solFunction         Define
+hi def link   solConstructor      Define
 hi def link   solFuncName         Function
 hi def link   solFuncModifier     Keyword
 hi def link   solFuncModCustom    Keyword
@@ -81,10 +81,10 @@ hi def link   solFuncCall         Function
 syn keyword   solModifier         modifier nextgroup=solModifiername skipwhite
 syn match     solModifierName     /\<[a-zA-Z_][0-9a-zA-z_$]*/ contained nextgroup=solModifierParam skipwhite
 syn region    solModifierParam    matchgroup=solParens start='(' end=')' contained contains=solComma,solValueType,solStorageType nextgroup=solModifierBody skipwhite skipempty 
-syn region    solModifierBody     start='{' end='}' contained contains=solTypeCast,solMethod,solFuncCall,solModifierInsert,solValueType,solConstant,solKeyword,solConditional,solRepeat,solLabel,solException,solStructure,solStorageType,solOperator,solNumber,solString,solFuncCall skipempty skipwhite keepend transparent
+syn region    solModifierBody     start='{' end='}' contained contains=solEmitEvent,solTypeCast,solMethod,solFuncCall,solModifierInsert,solValueType,solConstant,solKeyword,solConditional,solRepeat,solLabel,solException,solStructure,solStorageType,solOperator,solNumber,solString,solFuncCall skipempty skipwhite keepend transparent
 syn match     solModifierInsert   /\<_\>/ contained 
 
-hi def link   solModifier         Type
+hi def link   solModifier         Define
 hi def link   solModifierName     Function
 hi def link   solModifierInsert   Function
 
@@ -93,10 +93,14 @@ syn match     solContract         /\<\%(contract\|library\|interface\)\>/ nextgr
 syn match     solContractName     /\<[a-zA-Z_][0-9a-zA-Z_]*/ contained nextgroup=solContractParent skipwhite
 syn region    solContractParent   start='is' end='{' contains=solContractName,solComma,solInheritor
 syn match     solInheritor        'is' contained
+syn region    solLibUsing         start='using' end='for' contains=solLibName
+syn match     solLibName          /[a-zA-Z_][0-9a-zA-Z_]*\s*\zefor/ 
 
-hi def link   solContract         Type
+hi def link   solContract         Define
 hi def link   solContractName     Function
 hi def link   solInheritor        Keyword
+hi def link   solLibUsing         Special
+hi def link   solLibName          Type
 
 " Events
 syn match     solEvent            'event' nextgroup=solEventName,solEventParams skipwhite
@@ -105,10 +109,10 @@ syn region    solEventParam       matchgroup=solParens start='(' end=')' contain
 syn match     solEventParamMod    /indexed/ contained
 syn keyword   solEmitEvent        emit 
 
-hi def link   solEvent            Type
+hi def link   solEvent            Define
 hi def link   solEventName        Function
 hi def link   solEventParamMod    Keyword
-hi def link   solEmitEvent        Keyword
+hi def link   solEmitEvent        Special
 
 " Comments
 syn keyword   solTodo             TODO FIXME XXX TBD contained
@@ -127,11 +131,11 @@ syn match     solNatspecTag       /@param\>/ contained
 syn match     solNatspecTag       /@return\>/ contained
 syn match     solNatspecParam     /\(@param\s*\)\@<=\<[a-zA-Z_][0-9a-zA-Z_]*/
 syn region    solNatspecBlock     start=/\/\/\// end=/$/ contains=solTodo,solNatspecTag,solNatspecParam
-syn region    solNatspecBlock     start=/\/\*\{2}/ end=/\*\// contains=solTodo,solNatspecTag,solNatspecParam,solDicks
+syn region    solNatspecBlock     start=/\/\*\{2}/ end=/\*\// contains=solTodo,solNatspecTag,solNatspecParam
 
 hi def link   solNatspecTag       SpecialComment
 hi def link   solNatspecBlock     Comment
-hi def link   solNatspecParam     PreProc
+hi def link   solNatspecParam     Define
 
 " Constants
 syn keyword   solConstant         true false wei szabo finney ether seconds minutes hours days weeks years now super 
@@ -141,14 +145,13 @@ hi def link   solConstant         Constant
 
 " Keywords
 syn keyword   solKeyword          abstract anonymous as assembly constant default
-syn keyword   solKeyword          delete final in inline using
-syn keyword   solKeyword          let match new of pragma typeof 
+syn keyword   solKeyword          delete final in inline 
+syn keyword   solKeyword          let match new of pragma 
 syn keyword   solKeyword          relocatable static type var 
 
 hi def link   solKeyword          Keyword
 
-"Builtin Methods
-syn keyword   solMethod           require return returns import keccak256 sha256 ripemd160 ecrecover addmod mullmod selfdestruct
+" Builtin Methods
 syn match     solMethod           /require\s*\ze(/ 
 syn match     solMethod           /return\s*\ze(/ 
 syn match     solMethod           /returns\s*\ze(/ 
@@ -163,7 +166,7 @@ syn match     selfdestruct        /selfdestruct\s*\ze(/
 
 hi def link   solMethod           Special
 
-"Miscellaneous
+" Miscellaneous
 syn keyword   solConditional      if else 
 syn keyword   solRepeat           while for do
 syn keyword   solLabel            case break continue 
