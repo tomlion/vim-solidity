@@ -16,14 +16,11 @@ hi def link   solConstant         Constant
 " Keywords
 syn keyword   solKeyword          abstract anonymous as assembly constant default
 syn keyword   solKeyword          delete emit final import in inline using
-syn keyword   solKeyword          interface let match modifier new of pragma typeof 
+syn keyword   solKeyword          interface let match new of pragma typeof 
 syn keyword   solKeyword          relocatable require return returns static type var 
 
 hi def link   solKeyword          Keyword
 
-syn keyword   solFuncModifier     external internal payable public pure view 
-
-hi def link   solFuncModifier     Keyword
 
 
 syn keyword   solConditional      if else 
@@ -65,21 +62,37 @@ syntax region solString           start=+\z(["']\)+  skip=+\\\%(\z1\|$\)+  end=+
 hi def link   solNumber           Number
 hi def link   solString           String
 
-" Functions & Modifiers
-syn keyword   solFunction         function nextgroup=solFuncName skipwhite
+" Functions
 syn keyword   solConstructor      constructor nextgroup=solFuncParam skipwhite
-syn region    solFuncParam        matchgroup=solParens start='(' end=')' contained contains=solFuncComma,solValueType,solStorageType nextgroup=solModifierName,solFuncReturn keepend skipempty skipwhite
-syn match     solFuncComma        ',' contained
+syn keyword   solFunction         function nextgroup=solFuncName skipwhite
 syn match     solFuncName         /\<[a-zA-Z_$][0-9a-zA-z_$]*/ contained nextgroup=solFuncParam skipwhite
-syn match     solModifierName     /\<[a-zA-Z_$][0-9a-zA-z_$]*/ contained nextgroup=solFuncParam,solModifiername skipempty skipwhite keepend
-syn region    solFuncReturn       matchgroup=solParens start='(' end=')' contained contains=solfuncComma,solValueType,solStorageType
+syn region    solFuncParam        matchgroup=solParens start='(' end=')' contained contains=solFuncComma,solValueType,solStorageType nextgroup=solFuncModCustom,solFuncReturn keepend skipempty skipwhite
+syn match     solFuncComma        ',' contained
+syn keyword   solFuncModifier     external internal payable public pure view 
+syn match     solFuncModCustom    /\<[a-zA-Z_$][0-9a-zA-z_$]*/ contained nextgroup=solFuncParam,solFuncModCustom skipempty skipwhite 
+syn region    solFuncReturn       matchgroup=solParens start='(' end=')' contained contains=solFuncComma,solValueType,solStorageType
+
 
 hi def link   solFunction         Type
 hi def link   solConstructor      Type
 hi def link   solFuncName         Function
 hi def link   solFuncComma        Delimiter
-hi def link   solModifierName     Keyword
+hi def link   solFuncModifier     Keyword
+hi def link   solFuncModCustom    Keyword
 hi def link   solParens           Delimiter
+
+" Modifiers
+syn keyword   solModifier         modifier nextgroup=solModifiername skipwhite
+syn match     solModifierName     /\<[a-zA-Z_$][0-9a-zA-z_$]*/ contained nextgroup=solModifierParam skipwhite
+syn region    solModifierParam    matchgroup=solParens start='(' end=')' contained contains=solModifierComma,solValueType,solStorageType nextgroup=solModifierBody skipwhite skipempty 
+syn region    solModifierBody     start='{' end='}' contained contains=solModifierInsert,solValueType,solConstant,solKeyword,solConditional,solRepeat,solLabel,solException,solStructure,solStorageType,solOperator,solNumber,solString skipempty skipwhite keepend transparent
+syn match     solModifierComma    ',' contained
+syn match     solModifierInsert   /\<_\>/ contained 
+
+hi def link   solModifier         Type
+hi def link   solModifierName     Function
+hi def link   solModifierComma    Delimiter
+hi def link   solModifierInsert   Function
 
 " Contracts, Librares, Interfaces
 syn match     solContract         /\<\%(contract\|library\|interface\)\>/ nextgroup=solContractName skipwhite
