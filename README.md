@@ -20,6 +20,9 @@ I intend to use this tool daily, so expect updates! PRs are also welcome.
 * overall more extensive and detailed syntax highlighting
 * various bug fixes
 
+## Before and After Example (new on left old on right)
+![vim-solidity before & after](https://imgur.com/KYi2Hse)
+
 ## Installation
 ### Pathogen
 Run the following command:
