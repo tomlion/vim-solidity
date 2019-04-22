@@ -35,7 +35,7 @@ hi def link   solValueType        Type
 hi def link   solTypeCast         Type
 
 " Complex Types
-syn keyword   solMapping          mapping matchgroup=solStructure
+syn keyword   solMapping          mapping
 syn keyword   solEnum             enum nextgroup=solEnumBody skipempty skipwhite
 syn region    solEnumBody         matchgroup=solParens start='(' end=')' contained contains=solComma,solValueType,solStorageType keepend
 syn keyword   solStruct           struct nextgroup=solStructBody skipempty skipwhite
@@ -60,7 +60,7 @@ hi def link   solString           String
 
 " Functions
 syn keyword   solConstructor      constructor nextgroup=solFuncParam skipwhite
-syn keyword   solFunction         function nextgroup=solFuncName skipwhite
+syn keyword   solFunction         function nextgroup=solFuncName,solFuncParam skipwhite
 syn match     solFuncName         /\<[a-zA-Z_][0-9a-zA-z_$]*/ contained nextgroup=solFuncParam skipwhite
 syn region    solFuncParam        matchgroup=solParens start='(' end=')' contained contains=solComma,solValueType,solStorageType nextgroup=solFuncModCustom,solFuncReturn,solFuncBody keepend skipempty skipwhite
 syn keyword   solFuncModifier     external internal payable public pure view private constant
@@ -91,10 +91,10 @@ hi def link   solModifierInsert   Function
 " Contracts, Librares, Interfaces
 syn match     solContract         /\<\%(contract\|library\|interface\)\>/ nextgroup=solContractName skipwhite
 syn match     solContractName     /\<[a-zA-Z_][0-9a-zA-Z_]*/ contained nextgroup=solContractParent skipwhite
-syn region    solContractParent   start='is' end='{' contains=solContractName,solComma,solInheritor
+syn region    solContractParent   start='is' end='{' contained contains=solContractName,solComma,solInheritor 
 syn match     solInheritor        'is' contained
 syn region    solLibUsing         start='using' end='for' contains=solLibName
-syn match     solLibName          /[a-zA-Z_][0-9a-zA-Z_]*\s*\zefor/
+syn match     solLibName          /[a-zA-Z_][0-9a-zA-Z_]*\s*\zefor/ contained
 
 hi def link   solContract         Define
 hi def link   solContractName     Function
@@ -179,14 +179,12 @@ hi def link   solAssemblyMethod   Special
 hi def link   solAssemblyConst    Constant
 
 " Builtin Methods
-syn keyword   solMethod           delete new var
+syn keyword   solMethod           delete new var return import
 syn match     solMethod           /blockhash\s*\ze(/
 syn match     solMethod           /require\s*\ze(/
 syn match     solMethod           /revert\s*\ze(/
 syn match     solMethod           /assert\s*\ze(/
-syn match     solMethod           /return\s*\ze(/
 syn match     solMethod           /returns\s*\ze(/
-syn match     solMethod           /import\s*\ze"/
 syn match     solMethod           /keccak256\s*\ze(/
 syn match     solMethod           /sha256\s*\ze(/
 syn match     solMethod           /ripemd160\s*\ze(/
