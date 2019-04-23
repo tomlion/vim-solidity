@@ -9,18 +9,11 @@ endif
 
 " Common Groups
 syn match     solComma            ','
-syn match     solIf               /\<if\>/ contained skipwhite skipempty nextgroup=solIfParens
-syn match     solElse             /\<else\>/ contained skipwhite skipempty nextgroup=solIf,solIfBlock
-syn region    solIfParens         start=/(/ end=/)/ contained nextgroup=solIfBlock skipwhite skipempty contains=solConstant,solOperator,solNumber,solString,solTypeCast
-syn region    solIfBlock          start=/{/ end=/}/ contained nextgroup=solElse skipwhite skipempty transparent
 syn match     solStorageType      /\(\<public\>\|\<private\>\|\<internal\>\)/ contained skipwhite skipempty nextgroup=solStorageType,solStorageConst
 syn match     solStorageconst     /\<constant\>/ contained skipwhite skipempty nextgroup=solStorageType
 syn match     solFuncStorageType  /\(\<storage\>\|\<calldata\>\|\<memory\>\)/ contained
 syn match     solFuncPayableType  /\<payable\>/ contained
 
-hi def link   solIf               Keyword
-hi def link   solElse             Keyword
-hi def link   solIfBlock         Constant
 hi def link   solStorageType      Keyword
 hi def link   solFuncStorageType  Keyword
 hi def link   solStorageConst     Keyword
@@ -71,7 +64,7 @@ syn match     solFuncModCustom    /\<[a-zA-Z_][0-9a-zA-z_]*/ contained nextgroup
 syn match     solFuncReturn       /\<returns\s*/ contained nextgroup=solFuncReturnParens
 syn region    solFuncReturnParens matchgroup=solParens start=/(/ end=/)/ contained contains=solValueType,solFuncStorageType,solReturn nextgroup=solFuncBody skipwhite skipempty
 syn region    solFuncBody         start='{' end='}' contained contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf skipempty skipwhite
-syn match     solFuncCall         /\<[a-zA-Z_][0-9a-zA-z_]*\s*\(\<uint\>\|\<int\>\|\<ufixed\>\|\<bytes\>\|\<address\>\|\<string\>\|\<bool\>\)\@<!\((\)\@=/ contained
+syn match     solFuncCall         /\(\<if\>\|\<uint\>\|\<int\>\|\<ufixed\>\|\<bytes\>\|\<address\>\|\<string\>\|\<bool\>\)\@<!\<[a-zA-Z_][0-9a-zA-z_]*\((\)\@=/ contained
 
 hi def link   solFunction         Define
 hi def link   solConstructor      Define
@@ -117,29 +110,6 @@ hi def link   solEvent            Define
 hi def link   solEventName        Function
 hi def link   solEventParamMod    Keyword
 hi def link   solEmitEvent        Special
-
-" Comments
-syn keyword   solTodo             TODO FIXME XXX TBD contained
-syn region    solComment          start=/\/\// end=/$/ contains=solTodo
-syn region    solComment          start=/\/\*/ end=/\*\// contains=solTodo
-
-hi def link   solTodo             Todo
-hi def link   solComment          Comment
-
-" Natspec
-syn match     solNatspecTag       /@dev\>/ contained
-syn match     solNatspecTag       /@title\>/ contained
-syn match     solNatspecTag       /@author\>/ contained
-syn match     solNatspecTag       /@notice\>/ contained
-syn match     solNatspecTag       /@param\>/ contained
-syn match     solNatspecTag       /@return\>/ contained
-syn match     solNatspecParam     /\(@param\s*\)\@<=\<[a-zA-Z_][0-9a-zA-Z_]*/
-syn region    solNatspecBlock     start=/\/\/\// end=/$/ contains=solTodo,solNatspecTag,solNatspecParam
-syn region    solNatspecBlock     start=/\/\*\{2}/ end=/\*\// contains=solTodo,solNatspecTag,solNatspecParam
-
-hi def link   solNatspecTag       SpecialComment
-hi def link   solNatspecBlock     Comment
-hi def link   solNatspecParam     Define
 
 " Constants
 syn keyword   solConstant         true false wei szabo finney ether seconds minutes hours days weeks years now super
@@ -241,3 +211,37 @@ syn region    solTypeCastParens   start=/(/ end=/)/ contained
 
 hi def link   solValueType        Type
 hi def link   solTypeCast         Type
+
+" Conditionals
+syn match     solIf               /\<if\>/ contained skipwhite skipempty nextgroup=solIfParens
+syn match     solElse             /\<else\>/ contained skipwhite skipempty nextgroup=solIf,solIfBlock
+syn region    solIfParens         start=/(/ end=/)/ contained nextgroup=solIfBlock skipwhite skipempty contains=solConstant,solOperator,solNumber,solString,solTypeCast
+syn region    solIfBlock          start=/{/ end=/}/ contained nextgroup=solElse skipwhite skipempty transparent
+
+
+hi def link   solIf               Keyword
+hi def link   solElse             Keyword
+hi def link   solIfBlock         Constant
+
+" Comments
+syn keyword   solTodo             TODO FIXME XXX TBD contained
+syn region    solComment          start=/\/\// end=/$/ contains=solTodo
+syn region    solComment          start=/\/\*/ end=/\*\// contains=solTodo
+
+hi def link   solTodo             Todo
+hi def link   solComment          Comment
+
+" Natspec
+syn match     solNatspecTag       /@dev\>/ contained
+syn match     solNatspecTag       /@title\>/ contained
+syn match     solNatspecTag       /@author\>/ contained
+syn match     solNatspecTag       /@notice\>/ contained
+syn match     solNatspecTag       /@param\>/ contained
+syn match     solNatspecTag       /@return\>/ contained
+syn match     solNatspecParam     /\(@param\s*\)\@<=\<[a-zA-Z_][0-9a-zA-Z_]*/
+syn region    solNatspecBlock     start=/\/\/\// end=/$/ contains=solTodo,solNatspecTag,solNatspecParam
+syn region    solNatspecBlock     start=/\/\*\{2}/ end=/\*\// contains=solTodo,solNatspecTag,solNatspecParam
+
+hi def link   solNatspecTag       SpecialComment
+hi def link   solNatspecBlock     Comment
+hi def link   solNatspecParam     Define
