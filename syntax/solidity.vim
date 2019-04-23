@@ -36,36 +36,42 @@ syn keyword   solEnum             enum nextgroup=solEnumBody skipempty skipwhite
 syn region    solEnumBody         matchgroup=solParens start='(' end=')' contained contains=solComma,solValueType
 syn keyword   solStruct           struct nextgroup=solStructBody skipempty skipwhite
 syn region    solStructBody       matchgroup=solParens start='{' end='}' contained contains=solComma,solValueType,solStruct,solEnum,solMapping
-syn match     solCustomType       /[a-zA-Z_][a-zA-Z0-9]*\s*\(\<public\>\|\<private\>\|\<internal\>\|\<constant\>\)\@=/ skipwhite skipempty nextgroup=solStorageType,solStorageConst
+syn match     solCustomType       /[a-zA-Z_][a-zA-Z0-9_]*\s*\(\<public\>\|\<private\>\|\<internal\>\|\<constant\>\)\@=/ skipwhite skipempty nextgroup=solStorageType,solStorageConst
 
 hi def link   solMapping          Define
 hi def link   solEnum             Define
 hi def link   solStruct           Define
-
-" Operators
-syn match     solOperator         /\(!\||\|&\|+\|-\|<\|>\|=\|%\|\/\|*\|\~\|\^\)/
-
-hi def link   solOperator         Operator
 
 " Numbers
 syntax match  solNumber           /\c\<\%(\d\+\%(e[+-]\=\d\+\)\=\|0b[01]\+\|0o\o\+\|0x\x\+\)\>/
 syntax match  solNumber           /\c\<\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%(e[+-]\=\d\+\)\=\>/
 syntax region solString           start=+\z(["']\)+  skip=+\\\%(\z1\|$\)+  end=+\z1+ end=+$+
 
+" Strings
 hi def link   solNumber           Number
 hi def link   solString           String
+
+" Operators
+syn match     solOperator         /\(!\||\|&\|+\|-\|<\|>\|=\|%\|\/\|*\|\~\|\^\)/
+
+hi def link   solOperator         Operator
+
+" Destructuring
+syn region    solDestructure      start=/(\ze\(uint\|int\|ufixed\|bytes\|address\|string\|bool\)/ end=/)\s*\ze=/ contained contains=solValueType,solComma,solFuncStorageType 
+
+hi def link   solDestructure      Keyword
 
 " Functions
 syn match     solConstructor      /\<constructor\>/ nextgroup=solFuncParam skipwhite skipempty
 syn match     solFunction         /\<function\>/ nextgroup=solFuncName,solFuncParam skipwhite skipempty
-syn match     solFuncName         /\<[a-zA-Z_][0-9a-zA-z_$]*/ contained nextgroup=solFuncParam skipwhite skipempty
+syn match     solFuncName         /\<[a-zA-Z_][0-9a-zA-z_]*/ contained nextgroup=solFuncParam skipwhite skipempty
 syn region    solFuncParam        matchgroup=solParens start='(' end=')' contained contains=solComma,solValueType,solFuncStorageType nextgroup=solFuncModCustom,solFuncModifier,solFuncReturn,solFuncBody skipempty skipwhite
 syn keyword   solFuncModifier     external internal payable public pure view private constant contained nextgroup=solFuncModifier,solFuncModCustom,solFuncReturn,solFuncBody skipwhite skipempty
-syn match     solFuncModCustom    /\<[a-zA-Z_][0-9a-zA-z_$]*/ contained nextgroup=solFuncReturn,solFuncParam,solFuncModCustom,solFuncBody skipempty skipwhite
+syn match     solFuncModCustom    /\<[a-zA-Z_][0-9a-zA-z_]*/ contained nextgroup=solFuncReturn,solFuncParam,solFuncModCustom,solFuncBody skipempty skipwhite
 syn match     solFuncReturn       /\<returns\s*/ contained nextgroup=solFuncReturnParens
 syn region    solFuncReturnParens matchgroup=solParens start=/(/ end=/)/ contained contains=solValueType,solFuncStorageType,solReturn nextgroup=solFuncBody skipwhite skipempty
-syn region    solFuncBody         start='{' end='}' contained contains=solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf skipempty skipwhite
-syn match     solFuncCall         /\<[a-zA-Z_][0-9a-zA-z_$]*\(\<uint\>\|\<int\>\|\<ufixed\>\|\<bytes\>\|\<address\>\|\<string\>\|\<bool\>\)\@<!\((\)\@=/ contained
+syn region    solFuncBody         start='{' end='}' contained contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf skipempty skipwhite
+syn match     solFuncCall         /\<[a-zA-Z_][0-9a-zA-z_]*\(\<uint\>\|\<int\>\|\<ufixed\>\|\<bytes\>\|\<address\>\|\<string\>\|\<bool\>\)\@<!\((\)\@=/ contained
 
 hi def link   solFunction         Define
 hi def link   solConstructor      Define
@@ -77,9 +83,9 @@ hi def link   solFuncReturn       special
 
 " Modifiers
 syn keyword   solModifier         modifier nextgroup=solModifiername skipwhite
-syn match     solModifierName     /\<[a-zA-Z_][0-9a-zA-z_$]*/ contained nextgroup=solModifierParam skipwhite
+syn match     solModifierName     /\<[a-zA-Z_][0-9a-zA-z_]*/ contained nextgroup=solModifierParam skipwhite
 syn region    solModifierParam    matchgroup=solParens start='(' end=')' contained contains=solComma,solValueType,solFuncStorageType nextgroup=solModifierBody skipwhite skipempty
-syn region    solModifierBody     start='{' end='}' contained contains=solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solFuncCall,solModifierInsert,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf skipempty skipwhite transparent
+syn region    solModifierBody     start='{' end='}' contained contains=solDestructure,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solFuncCall,solModifierInsert,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf skipempty skipwhite transparent
 syn match     solModifierInsert   /\<_\>/ containedin=solModifierBody
 
 hi def link   solModifier         Define
