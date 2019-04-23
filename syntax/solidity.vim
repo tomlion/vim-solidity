@@ -202,14 +202,22 @@ hi def link   solLabel            Label
 hi def link   solException        Exception
 
 " Simple Types
-syn match     solValueType        /\<uint\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
-syn match     solValueType        /\<int\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
-syn match     solValueType        /\<fixed\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
-syn match     solValueType        /\<ufixed\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
-syn match     solValueType        /\<bytes\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
-syn match     solValueType        /\<address\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
-syn match     solValueType        /\<string\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
-syn match     solValueType        /bool\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<uint\d*\>/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<int\d*\>/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<fixed\d*\>/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<ufixed\d*\>/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<bytes\d*\>/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<address\>/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<string\>/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<bool\>/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<uint\d*\[\]/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<int\d*\[\]/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<fixed\d*\[\]/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<ufixed\d*\[\]/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<bytes\d*\[\]/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<address\[\]/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<string\[\]/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /bool\[\]/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
 syn match     solTypeCast         /\<uint\d*\ze\s*(/
 syn match     solTypeCast         /\<int\d*\ze\s*(/
 syn match     solTypeCast         /\<ufixed\d*\ze\s*(/
