@@ -12,39 +12,25 @@ syn match     solComma            ','
 syn match     solIf               /if\s*/ contained skipwhite skipempty nextgroup=solIfParens
 syn region    solIfParens         start=/(/ end=/)/ contained nextgroup=solIfBlock skipwhite skipempty contains=solConstant,solOperator,solNumber,solString
 syn region    solIfBlock          start=/{/ end=/}/ contained
+syn match     solStorageType      /\(public\|private\|internal\)/ contained skipwhite skipempty nextgroup=solStorageType,solStorageConst
+syn match     solStorageconst     /constant/ contained skipwhite skipempty nextgroup=solStorageType
 
 hi def link   solIf               Keyword
+hi def link   solStorageType      Keyword
+hi def link   solStorageConst     Keyword
 
 " Common Groups Highlighting
 hi def link   solParens           Normal
 hi def link   solComma            Normal
 
-" Simple Types
-syn match     solValueType        /\<uint\d*\>/ nextgroup=solStorageType      
-syn match     solValueType        /\<int\d*\>/ nextgroup=solStorageType 
-syn match     solValueType        /\<fixed\d*\>/ nextgroup=solStorageType
-syn match     solValueType        /\<ufixed\d*\>/ nextgroup=solStorageType
-syn match     solValueType        /\<bytes\d*\>/ nextgroup=solStorageType
-syn match     solValueType        /\<address\>/ nextgroup=solStorageType
-syn match     solValueType        /\<string\>/ nextgroup=solStorageType
-syn match     solValueType        /\<bool\>/ nextgroup=solStorageType
-syn match     solTypeCast         /\<uint\d*\ze\s*(/
-syn match     solTypeCast         /\<int\d*\ze\s*(/
-syn match     solTypeCast         /\<ufixed\d*\ze\s*(/
-syn match     solTypeCast         /\<bytes\*\ze\s*(/
-syn match     solTypeCast         /\<address\ze\s*(/
-syn match     solTypeCast         /\<string\ze\s*(/
-syn match     solTypeCast         /\<bool\ze\s*(/
-
-hi def link   solValueType        Type
-hi def link   solTypeCast         Type
-
 " Complex Types
-syn keyword   solMapping          mapping
+syn match     solMapping          /mapping/ nextgroup=solMappingParens skipwhite skipempty 
+syn region    solMappingParens    start=/(/ end=/)/ contained contains=solValueType,solMapping nextgroup=solStorageType,solStorageConst skipwhite skipempty
 syn keyword   solEnum             enum nextgroup=solEnumBody skipempty skipwhite
 syn region    solEnumBody         matchgroup=solParens start='(' end=')' contained contains=solComma,solValueType,solStorageType 
 syn keyword   solStruct           struct nextgroup=solStructBody skipempty skipwhite
 syn region    solStructBody       matchgroup=solParens start='{' end='}' contained contains=solComma,solValueType,solStorageType,solStruct,solEnum,solMapping 
+syn match     solCustomType       /[a-zA-Z_][a-zA-Z0-9]*\s*\(public\|private\|internal\|constant\)\@=/ skipwhite skipempty nextgroup=solStorageType,solStorageConst
 
 hi def link   solMapping          Define
 hi def link   solEnum             Define
@@ -215,5 +201,22 @@ hi def link   solRepeat           Repeat
 hi def link   solLabel            Label
 hi def link   solException        Exception
 
-syn keyword   solStorageType      contained storage memory calldata payable constant
-hi def link   solStorageType      StorageClass
+" Simple Types
+syn match     solValueType        /\<uint\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<int\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<fixed\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<ufixed\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<bytes\d*\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<address\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /\<string\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solValueType        /bool\(\[\]\)\=/ nextgroup=solStorageType,solStorageConst skipwhite skipempty
+syn match     solTypeCast         /\<uint\d*\ze\s*(/
+syn match     solTypeCast         /\<int\d*\ze\s*(/
+syn match     solTypeCast         /\<ufixed\d*\ze\s*(/
+syn match     solTypeCast         /\<bytes\*\ze\s*(/
+syn match     solTypeCast         /\<address\ze\s*(/
+syn match     solTypeCast         /\<string\ze\s*(/
+syn match     solTypeCast         /\<bool\ze\s*(/
+
+hi def link   solValueType        Type
+hi def link   solTypeCast         Type
