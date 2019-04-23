@@ -57,7 +57,7 @@ syn match     solOperator         /\(!\||\|&\|+\|-\|<\|>\|=\|%\|\/\|*\|\~\|\^\)/
 hi def link   solOperator         Operator
 
 " Destructuring
-syn region    solDestructure      start=/(\ze\(uint\|int\|ufixed\|bytes\|address\|string\|bool\)/ end=/)\s*\ze=/ contained contains=solValueType,solComma,solFuncStorageType 
+syn region    solDestructure      start=/\(\S\)\@<!(/ end=/)\s*\ze=/ contained contains=solValueType,solComma,solFuncStorageType 
 
 hi def link   solDestructure      Keyword
 
