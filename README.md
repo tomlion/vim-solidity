@@ -24,6 +24,14 @@ I intend to use this tool daily, so expect updates! PRs are also welcome.
 ![vim-solidity before & after](https://i.imgur.com/KYi2Hse.png)
 
 ## Installation
+
+**Important:** If you are using `vim-polyglot` make sure to disable the default syntax provider for solidity:
+```
+let g:polyglot_disabled = ['solidity']
+```
+
+If you do not do this, you will be using a combination of the old tomlion repo and this new repo. You will get some strange syntax...
+
 ### Pathogen
 Run the following command:
 

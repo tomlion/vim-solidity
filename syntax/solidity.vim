@@ -28,13 +28,13 @@ syn match     solValueType        /\<bytes\d*\>/ nextgroup=solStorageType
 syn match     solValueType        /\<address\>/ nextgroup=solStorageType
 syn match     solValueType        /\<string\>/ nextgroup=solStorageType
 syn match     solValueType        /\<bool\>/ nextgroup=solStorageType
-syn match     solTypeCast         /uint\d*\ze\s*(/
-syn match     solTypeCast         /int\d*\ze\s*(/
-syn match     solTypeCast         /ufixed\d*\ze\s*(/
-syn match     solTypeCast         /bytes\*\ze\s*(/
-syn match     solTypeCast         /address\ze\s*(/
-syn match     solTypeCast         /string\ze\s*(/
-syn match     solTypeCast         /bool\ze\s*(/
+syn match     solTypeCast         /\<uint\d*\ze\s*(/
+syn match     solTypeCast         /\<int\d*\ze\s*(/
+syn match     solTypeCast         /\<ufixed\d*\ze\s*(/
+syn match     solTypeCast         /\<bytes\*\ze\s*(/
+syn match     solTypeCast         /\<address\ze\s*(/
+syn match     solTypeCast         /\<string\ze\s*(/
+syn match     solTypeCast         /\<bool\ze\s*(/
 
 hi def link   solValueType        Type
 hi def link   solTypeCast         Type
