@@ -71,7 +71,7 @@ syn match     solFuncModCustom    /\<[a-zA-Z_][0-9a-zA-z_]*/ contained nextgroup
 syn match     solFuncReturn       /\<returns\s*/ contained nextgroup=solFuncReturnParens
 syn region    solFuncReturnParens matchgroup=solParens start=/(/ end=/)/ contained contains=solValueType,solFuncStorageType,solReturn nextgroup=solFuncBody skipwhite skipempty
 syn region    solFuncBody         start='{' end='}' contained contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf skipempty skipwhite
-syn match     solFuncCall         /\<[a-zA-Z_][0-9a-zA-z_]*\(\<uint\>\|\<int\>\|\<ufixed\>\|\<bytes\>\|\<address\>\|\<string\>\|\<bool\>\)\@<!\((\)\@=/ contained
+syn match     solFuncCall         /\<[a-zA-Z_][0-9a-zA-z_]*\s*\(\<uint\>\|\<int\>\|\<ufixed\>\|\<bytes\>\|\<address\>\|\<string\>\|\<bool\>\)\@<!\((\)\@=/ contained
 
 hi def link   solFunction         Define
 hi def link   solConstructor      Define
