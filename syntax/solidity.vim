@@ -222,11 +222,12 @@ hi def link   solIf               Keyword
 hi def link   solElse             Keyword
 
 " Loops
-syn match     solLoop             /\(\<for\>\|<\while\>\)/ contained skipwhite skipempty nextgroup=solIfParens
+syn match     solLoop             /\(\<for\>\|\<while\>\)/ contained skipwhite skipempty nextgroup=solIfParens
 syn region    solLoopParens       start=/(/ end=/)/ contained nextgroup=solLoopBlock skipwhite skipempty contains=solConstant,solOperator,solNumber,solString,solTypeCast
 syn region    solLoopBlock        start=/{/ end=/}/ contained skipwhite skipempty transparent
 
 hi def link   solLoop             Keyword
+hi def link   solLoopParens       Keyword
 
 " Comments
 syn keyword   solTodo             TODO FIXME XXX TBD contained
