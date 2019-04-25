@@ -63,9 +63,8 @@ syn keyword   solFuncModifier     external internal payable public pure view pri
 syn match     solFuncModCustom    /\<[a-zA-Z_][0-9a-zA-z_]*/ contained nextgroup=solFuncReturn,solFuncParam,solFuncModCustom,solFuncBody skipempty skipwhite
 syn match     solFuncReturn       /\<returns\s*/ contained nextgroup=solFuncReturnParens
 syn region    solFuncReturnParens matchgroup=solParens start=/(/ end=/)/ contained contains=solValueType,solFuncStorageType,solReturn nextgroup=solFuncBody skipwhite skipempty
-syn region    solFuncBody         start='{' end='}' contained contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,olFuncCall,solIf,solLoop skipempty skipwhite
-syn match     solFuncCall         /\(\<if\>\|\<uint\>\|\<int\>\|\<ufixed\>\|\<bytes\>\|\<address\>\|\<string\>\|\<bool\>\)\@<!\<[a-zA-Z_][0-9a-zA-z_]*\((\)\@=/ contained nextgroup=solFuncCallParens skipwhite skipempty
-syn region    solFuncCallParens   matchgroup=solParens start=/(/ end=/)/ contained contains=solFuncCall
+syn region    solFuncBody         start='{' end='}' contained contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf,solLoop skipempty skipwhite
+syn match     solFuncCall         /\(\<if\>\|\<uint\>\|\<int\>\|\<ufixed\>\|\<bytes\>\|\<address\>\|\<string\>\|\<bool\>\)\@<!\<[a-zA-Z_][0-9a-zA-z_]*\((\)\@=/ contained
 
 hi def link   solFunction         Define
 hi def link   solConstructor      Define
@@ -216,18 +215,19 @@ hi def link   solTypeCast         Type
 " Conditionals
 syn match     solIf               /\<if\>/ contained skipwhite skipempty nextgroup=solIfParens
 syn match     solElse             /\<else\>/ contained skipwhite skipempty nextgroup=solIf,solIfBlock
-syn region    solIfParens         start=/(/ end=/)/ contained nextgroup=solIfBlock skipwhite skipempty contains=solConstant,solOperator,solNumber,solString,solTypeCast,solFuncCall
-syn region    solIfBlock          start=/{/ end=/}/ contained nextgroup=solElse skipwhite skipempty contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf,solLoop 
+syn region    solIfParens         start=/(/ end=/)/ contained nextgroup=solIfBlock skipwhite skipempty contains=solConstant,solOperator,solNumber,solString,solTypeCast
+syn region    solIfBlock          start=/{/ end=/}/ contained nextgroup=solElse skipwhite skipempty transparent
 
 hi def link   solIf               Keyword
 hi def link   solElse             Keyword
 
 " Loops
 syn match     solLoop             /\(\<for\>\|\<while\>\)/ contained skipwhite skipempty nextgroup=solIfParens
-syn region    solLoopParens       start=/(/ end=/)/ contained nextgroup=solLoopBlock skipwhite skipempty contains=solConstant,solOperator,solNumber,solString,solTypeCast,solFuncCall
-syn region    solLoopBlock        start=/{/ end=/}/ contained skipwhite skipempty contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf,solLoop 
+syn region    solLoopParens       start=/(/ end=/)/ contained nextgroup=solLoopBlock skipwhite skipempty contains=solConstant,solOperator,solNumber,solString,solTypeCast
+syn region    solLoopBlock        start=/{/ end=/}/ contained skipwhite skipempty transparent
 
 hi def link   solLoop             Keyword
+
 
 " Comments
 syn keyword   solTodo             TODO FIXME XXX TBD contained
