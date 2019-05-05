@@ -46,12 +46,19 @@ hi def link   solEnum             Define
 hi def link   solStruct           Define
 
 " Numbers
-syntax match  solNumber           '\v\c<%(\d+%(e[+-]=\d+)=|0b[01]+|0o\o+|0x\x\+)>'
-syntax match  solNumber           '\v\c\<%(\d+.\d+|d+.|.\d+)%(e[+-]=\d+)=>'
+" integers
+syntax match  solNumber           '\v(\S)@<!\d+'
+" floats
+syntax match  solNumber           '\v(\S)@<![0-9]*\.[0-9]*'
+" hex numbers
+syntax match  solNumber           '\v(\S)@<!0x\x+'
+" scientific notation
+syntax match  solNumber           '\v(\S)@<![0-9]+\.*[0-9]*e+(\+|\-)*[0-9]*'
+
+" Strings
 syntax region solString           start=/\v"/ skip=/\v\\./ end=/\v"/
 syntax region solString           start="\v'" skip="\v\\." end="\v'"
 
-" Strings
 hi def link   solNumber           Number
 hi def link   solString           String
 
@@ -104,7 +111,7 @@ syn region    solFuncParam
 
 syn keyword   solFuncModifier     contained nextgroup=solFuncModifier,solFuncModCustom,solFuncReturn,solFuncBody skipwhite skipempty
       \ external internal payable public pure view private constant
-syn match     solFuncModCustom    contained nextgroup=solFuncReturn,solFuncParam,solFuncModCustom,solFuncBody skipempty skipwhite
+syn match     solFuncModCustom    contained nextgroup=solFuncModifier,solFuncModCustom,solFuncReturn,solFuncBody,solFuncModParens  skipempty skipwhite
       \ '\v<[a-zA-Z_][0-9a-zA-z_]*'
 syn keyword   solFuncReturn       contained nextgroup=solFuncRetParens skipwhite skipempty returns
 syn region    solFuncRetParens    contains=solValueType,solFuncStorageType nextgroup=solFuncBody skipempty skipwhite
@@ -116,6 +123,9 @@ syn region    solFuncBody         contained contains=solDestructure,solComment,s
 syn match     solFuncCall         contained skipempty skipwhite nextgroup=solFuncCallParens
       \ '\v(<if>|<uint>|<int>|<ufixed>|<bytes>|<address>|<string>|<bool>)@<!<[a-zA-Z_][0-9a-zA-z_]*\s*(\((\n|.|\s)*\))@='
 syn region    solFuncCallParens   contained transparent
+      \ start='('
+      \ end=')'
+syn region    solFuncModParens    contained contains=solConstant nextgroup=solFuncReturn,solFuncModifier,solFuncModCustom,solFuncBody skipempty skipwhite transparent
       \ start='('
       \ end=')'
 
@@ -212,7 +222,7 @@ hi def link   solAssemblyCond     Conditional
 syn keyword   solMethod           delete new var return import
 syn region    solMethodParens     start='(' end=')' contained transparent
 syn keyword   solMethod           nextgroup=solMethodParens skipwhite skipempty
-      \ blockhash require revert assert returns keccak256 sha256
+      \ blockhash require revert assert keccak256 sha256
       \ ripemd160 ecrecover addmod mullmod selfdestruct
 
 hi def link   solMethod           Special
