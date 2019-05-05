@@ -20,7 +20,7 @@ I intend to use this tool daily, so expect updates! PRs are also welcome.
 * overall more extensive and detailed syntax highlighting
 * various bug fixes
 
-## Before and After Example (old on left new on right)
+## Before and After Example (new on left old on right)
 ![vim-solidity before & after](https://i.imgur.com/mmfron7.png)
 
 ## Installation
