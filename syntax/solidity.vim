@@ -46,14 +46,9 @@ hi def link   solEnum             Define
 hi def link   solStruct           Define
 
 " Numbers
-" integers
-syntax match  solNumber           '\v(\S)@<!\d+'
-" floats
-syntax match  solNumber           '\v(\S)@<![0-9]*\.[0-9]*'
-" hex numbers
-syntax match  solNumber           '\v(\S)@<!0x\x+'
-" scientific notation
-syntax match  solNumber           '\v(\S)@<![0-9]+\.*[0-9]*e+(\+|\-)*[0-9]*'
+syntax match  solNumber           '\v0x\x+>'
+syntax match  solNumber           '\v\c<%(\d+%(e[+-]=\d+)=|0b[01]+|0o\o+|0x\x+)>'
+syntax match solNumber            '\v\c<%(\d+.\d+|\d+.|.d+)%(e[+-]=\d+)=>'
 
 " Strings
 syntax region solString           start=/\v"/ skip=/\v\\./ end=/\v"/
