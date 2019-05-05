@@ -20,8 +20,8 @@ I intend to use this tool daily, so expect updates! PRs are also welcome.
 * overall more extensive and detailed syntax highlighting
 * various bug fixes
 
-## Before and After Example (new on left old on right)
-![vim-solidity before & after](https://i.imgur.com/KYi2Hse.png)
+## Before and After Example (old on left new on right)
+![vim-solidity before & after](https://imgur.com/CXucXEh)
 
 ## Installation
 
