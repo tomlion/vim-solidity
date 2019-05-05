@@ -21,7 +21,7 @@ I intend to use this tool daily, so expect updates! PRs are also welcome.
 * various bug fixes
 
 ## Before and After Example (old on left new on right)
-![vim-solidity before & after](https://imgur.com/CXucXEh)
+![vim-solidity before & after](https://i.imgur.com/CXucXEh.png)
 
 ## Installation
 
