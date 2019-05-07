@@ -112,7 +112,7 @@ syn keyword   solFuncReturn       contained nextgroup=solFuncRetParens skipwhite
 syn region    solFuncRetParens    contains=solValueType,solFuncStorageType nextgroup=solFuncBody skipempty skipwhite
       \ start='(' 
       \ end=')' 
-syn region    solFuncBody         contained contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf,solLoop skipempty skipwhite
+syn region    solFuncBody         contained fold transparent contains=solDestructure,solComment,solAssemblyBlock,solEmitEvent,solTypeCast,solMethod,solValueType,solConstant,solKeyword,solRepeat,solLabel,solException,solStructure,solFuncStorageType,solOperator,solNumber,solString,solFuncCall,solIf,solLoop skipempty skipwhite
       \ start='{' 
       \ end='}' 
 syn match     solFuncCall         contained skipempty skipwhite nextgroup=solFuncCallParens
