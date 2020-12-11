@@ -11,7 +11,7 @@ endif
 " contract, library and event are defined at bottom of file
 syn keyword solKeyword           abstract anonymous as assembly break case catch constant continue default
 syn keyword solKeyword           delete do else emit enum external final for function if import in indexed inline
-syn keyword solKeyword           interface internal is let match memory modifier new of payable pragma private public pure
+syn keyword solKeyword           constructor interface internal is let match memory modifier new of payable pragma private public pure
 syn keyword solKeyword           relocatable require return returns static storage struct throw try type typeof using
 syn keyword solKeyword           var view while
 syn keyword solConstant          true false wei szabo finney ether seconds minutes hours days weeks years now
