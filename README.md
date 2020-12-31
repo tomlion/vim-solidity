@@ -24,5 +24,12 @@ Add the following line to your `~/.vimrc`:
 Plug 'tomlion/vim-solidity'
 ```
 
+### Built-in package manager
+Using Vim 8 native package loading.
+```bash
+mkdir -p ~/.vim/pack/solidity/start/
+git clone https://github.com/tomlion/vim-solidity.git ~/.vim/pack/solidity/start/vim-solidity
+```
+
 ### No Plugin Manager
 Copy all of the files manually into your `~/.vim`.
